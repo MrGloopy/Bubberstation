@@ -14,6 +14,10 @@
 	righthand_file = 'modular_zubbers/icons/mob/inhands/seclite_implant_righthand.dmi'
 	force = 0
 
+/obj/item/lighter/integrated
+	name = "thumbtip lighter"
+	desc = "Galactic polling indicated outrageous market demand for this particular cybernetic addition - specifically a hinged false fingertip with a standard lighter housing inside, with many firms citing 'increased reproductive acquisition' as one of the primary survey results. Translated into Sol Common, this means that lighting cigarettes with your finger helps you pull. Allegedly."
+
 /obj/item/organ/cyberimp/arm/toolkit/seclite
 	name = "seclite implant"
 	desc = "An implanted model of seclite installed in the palm."
@@ -34,6 +38,30 @@
 	desc = "An implanted foam dart blaster from Donksoft. Do not aim at face. Do not use modified darts."
 	items_to_create = list(/obj/item/gun/ballistic/toy/foamforce_implant)
 
+/obj/item/organ/cyberimp/arm/toolkit/civilian_lighter
+	name = "thumbtip lighter implant"
+	desc = "This extraordinarily useless implant was a product of market demand, and it exists because the galactic diaspora apparently craves the ability to light things with their thumbtips."
+	items_to_create = list(/obj/item/lighter/integrated)
+
+/obj/item/organ/cyberimp/arm/toolkit/civilian_lighter/emp_act(severity)
+	. = ..()
+	if(. & EMP_PROTECT_SELF || !IS_ROBOTIC_ORGAN(src))
+		return
+	var/effect_chance = 0
+	switch(severity)
+		if(EMP_LIGHT)
+			effect_chance = 15
+		if(EMP_HEAVY)
+			effect_chance = 30
+	if(prob(effect_chance) && owner)
+		owner.visible_message(
+			span_danger("[owner]'s thumbtip lighter sparks repeatedly!"),
+			span_warning("Your thumbtip lighter malfunctions, sparking uncontrollably!")
+		)
+		do_sparks(3, TRUE, owner)
+		owner.adjust_fire_stacks(1)
+		playsound(owner, 'sound/items/lighter/lighter_on.ogg', 50, TRUE)
+
 //LEFT ARM IMPLANTS
 /obj/item/organ/cyberimp/arm/toolkit/power_cord/left_arm
 	zone = BODY_ZONE_L_ARM
@@ -43,7 +71,7 @@
 	zone = BODY_ZONE_L_ARM
 	slot = ORGAN_SLOT_LEFT_ARM_AUG
 
-/obj/item/organ/cyberimp/arm/toolkit/lighter/left_arm
+/obj/item/organ/cyberimp/arm/toolkit/civilian_lighter/left_arm
 	zone = BODY_ZONE_L_ARM
 	slot = ORGAN_SLOT_LEFT_ARM_AUG
 
@@ -76,7 +104,7 @@
 	zone = BODY_ZONE_R_ARM
 	slot = ORGAN_SLOT_RIGHT_ARM_AUG
 
-/obj/item/organ/cyberimp/arm/toolkit/lighter/right_arm
+/obj/item/organ/cyberimp/arm/toolkit/civilian_lighter/right_arm
 	zone = BODY_ZONE_R_ARM
 	slot = ORGAN_SLOT_RIGHT_ARM_AUG
 

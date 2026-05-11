@@ -46,7 +46,7 @@
 /datum/augment_item/implant/l_arm/toolkit/lighter
 	name = "Left Lighter Implant"
 	cost = 1
-	path = /obj/item/organ/cyberimp/arm/toolkit/lighter/left_arm
+	path = /obj/item/organ/cyberimp/arm/toolkit/civilian_lighter/left_arm
 
 /datum/augment_item/implant/l_arm/toolkit/seclite
 	name = "Left Arm Seclite"
@@ -84,7 +84,7 @@
 /datum/augment_item/implant/r_arm/toolkit/lighter
 	name = "Right Lighter Implant"
 	cost = 1
-	path = /obj/item/organ/cyberimp/arm/toolkit/lighter/right_arm
+	path = /obj/item/organ/cyberimp/arm/toolkit/civilian_lighter/right_arm
 
 /datum/augment_item/implant/r_arm/toolkit/seclite
 	name = "Right Arm Seclite"
